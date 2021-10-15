@@ -1,7 +1,10 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <Button name="Add" />
+    <Button
+      :name="showTasks ? 'Close' : 'Add Task'"
+      @toggle-add="$emit('toggle-add')"
+    />
   </header>
 </template>
 
@@ -12,8 +15,8 @@ export default {
   props: {
     title: {
       type: String,
-      default: "List of tasks",
     },
+    showTasks: Boolean,
   },
   components: {
     Button,

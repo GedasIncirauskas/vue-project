@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     onClick() {
-      console.log("click");
+      this.$emit("toggle-add");
     },
   },
 };
@@ -22,7 +22,7 @@ export default {
   background: rgb(0, 0, 0);
   color: rgb(232, 232, 232);
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;

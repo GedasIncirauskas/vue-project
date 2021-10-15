@@ -1,6 +1,13 @@
 <template>
   <div class="container">
-    <Header title="Task lists" />
+    <Header
+      title="Task lists"
+      @toggle-add="toggleNewTask"
+      :showTasks="showTasks"
+    />
+    <section>
+      <AddTask v-show="showTasks" @add-task="addTask" />
+    </section>
     <Tasks @toggle-reminder="toggle" @delete-task="deleteTask" :tasks="tasks" />
   </div>
 </template>
@@ -8,16 +15,19 @@
 <script>
 import Header from "./components/Header.vue";
 import Tasks from "./components/Tasks.vue";
+import AddTask from "./components/AddTask.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Tasks,
+    AddTask,
   },
   data() {
     return {
       tasks: [],
+      showTasks: false,
     };
   },
   methods: {
@@ -28,6 +38,12 @@ export default {
       this.tasks = this.tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
       );
+    },
+    addTask(addedTask) {
+      this.tasks = [...this.tasks, addedTask];
+    },
+    toggleNewTask() {
+      this.showTasks = !this.showTasks;
     },
   },
 
@@ -64,12 +80,11 @@ export default {
 }
 
 .container {
-  max-width: 500px;
-  margin: 30px auto;
+  max-width: 30rem;
+  margin: 1rem auto;
   overflow: auto;
-  min-height: 300px;
-  border: 1px solid steelblue;
-  padding: 30px;
-  border-radius: 5px;
+  border: 0.1rem solid rgb(0, 24, 43);
+  padding: 1.5rem;
+  border-radius: 0.1rem;
 }
 </style>
